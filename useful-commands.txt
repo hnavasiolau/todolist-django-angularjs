@@ -14,4 +14,16 @@ workon env1
 5. create new django project
 python c:\Users\Henadz\Envs\env1\Scripts\django-admin.py startproject djangoproject
 
+6. run django development server (run from djangoproject directory). The server will be started at http://localhost:8000/
+python manage.py runserver
+
+7. create application "todolist"
+python manage.py startapp todolist
+
+8. create db
+python manage.py syncdb
+
+9. open shell
+python manage.py shell
+
 
