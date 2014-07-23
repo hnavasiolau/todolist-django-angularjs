@@ -1,0 +1,17 @@
+1. Create a new virtual environment
+mkvirtualenv env1
+The environment is created in c:\Users\Henadz\Envs
+
+2. install django
+pip install django
+
+3. install djangorestframework
+pip install djangorestframework
+
+4. switch to environment env1
+workon env1
+
+5. create new django project
+python c:\Users\Henadz\Envs\env1\Scripts\django-admin.py startproject djangoproject
+
+
