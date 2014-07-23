@@ -1,3 +1,5 @@
 from django.db import models
 
-# Create your models here.
+class TodoListItem(models.Model):
+    text = models.CharField(max_length=200)
+    isCompleted = models.BooleanField(default=False)
