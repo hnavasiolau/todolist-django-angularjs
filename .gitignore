@@ -1,1 +1,2 @@
 *.pyc
+/djangoproject/db.sqlite3
