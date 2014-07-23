@@ -1,12 +1,10 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url, include
+from rest_framework import routers
+from todolist import views
 
-from django.contrib import admin
-admin.autodiscover()
+router = routers.DefaultRouter()
+router.register(r'todolist', views.TodoListItemViewSet)
 
 urlpatterns = patterns('',
-    # Examples:
-    # url(r'^$', 'djangoproject.views.home', name='home'),
-    # url(r'^blog/', include('blog.urls')),
-
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^', include(router.urls))
 )

@@ -1,3 +1,5 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from todolist.models import TodoListItem
 
-# Create your views here.
+class TodoListItemViewSet(viewsets.ModelViewSet):
+    model = TodoListItem
