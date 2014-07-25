@@ -1,2 +1,4 @@
 *.pyc
 /djangoproject/db.sqlite3
+/angularjsproject/.idea
+/angularjsproject/*.iml
