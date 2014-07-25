@@ -1,1 +1,9 @@
-TODO List will be here
+<h2>TODO List</h2>
+<div ng-controller="TaskListController as taskList">
+    <div ng-repeat="task in taskList.tasks">
+        <input type="checkbox" ng-model="task.completed">
+        <span ng-class="{'line-through': task.completed}">
+            <span>{{task.text}}</span>
+        </span>
+    </div>
+</div>
