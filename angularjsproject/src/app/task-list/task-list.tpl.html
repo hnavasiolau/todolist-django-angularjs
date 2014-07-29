@@ -1,12 +1,13 @@
 <h2>TODO List</h2>
 <div ng-controller="TaskListController as taskList">
+    <div class="row">
+        <input type="checkbox" class="col-lg-1" ng-model="taskList.allCompleted" ng-change="taskList.completeAll()">
+        <input type="text" class="col-lg-5" ng-model="taskList.newTask.text" ng-enter="taskList.addNewTaskToList()" placeholder="What needs to be done?"/>
+    </div>
 
-    <input type="checkbox" ng-model="taskList.allCompleted" ng-change="taskList.completeAll()">
-    <input type="text" ng-model="taskList.newTask.text" ng-enter="taskList.addNewTaskToList()" placeholder="What needs to be done?"/>
-
-    <div ng-repeat="task in taskList.tasks">
-        <input type="checkbox" ng-model="task.completed">
-        <span ng-class="{'line-through': task.completed}" ng-dblclick="taskList.startEditing(task)">
+    <div class="row" ng-repeat="task in taskList.tasks">
+        <input type="checkbox" class="col-lg-1" ng-model="task.completed">
+        <span class="col-lg-4" ng-class="{'line-through': task.completed}" ng-dblclick="taskList.startEditing(task)">
             <span ng-hide="task.editing">{{task.text}}</span>
 
             <input ng-model="task.text"
@@ -14,6 +15,6 @@
                    ng-blur="taskList.doneEditing(task)"
                    ng-show="task.editing">
         </span>
-        <button ng-click="taskList.removeTask(task)"></button>
+        <button class="btn glyphicon glyphicon-remove col-lg-1" ng-click="taskList.removeTask(task)"></button>
     </div>
 </div>
