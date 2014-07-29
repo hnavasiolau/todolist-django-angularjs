@@ -6,8 +6,13 @@
 
     <div ng-repeat="task in taskList.tasks">
         <input type="checkbox" ng-model="task.completed">
-        <span ng-class="{'line-through': task.completed}">
-            <span>{{task.text}}</span>
+        <span ng-class="{'line-through': task.completed}" ng-dblclick="taskList.startEditing(task)">
+            <span ng-hide="task.editing">{{task.text}}</span>
+
+            <input ng-model="task.text"
+                   ng-enter="taskList.doneEditing(task)"
+                   ng-blur="taskList.doneEditing(task)"
+                   ng-show="task.editing">
         </span>
         <button ng-click="taskList.removeTask(task)"></button>
     </div>

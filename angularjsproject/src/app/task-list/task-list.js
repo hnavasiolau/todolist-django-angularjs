@@ -40,6 +40,14 @@
             this.tasks.splice(this.tasks.indexOf(task), 1);
         };
 
+        this.startEditing = function (task) {
+            task.editing = true;
+        };
+
+        this.doneEditing = function (task) {
+            task.editing = false;
+        };
+
         this.resetNewTask();
     });
 
