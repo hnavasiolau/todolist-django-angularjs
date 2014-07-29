@@ -17,27 +17,25 @@
 
 
     taskList.controller('TaskListController', function(){
-        this.tasks = testTasks;
-        this.allCompleted = false;
+        this.todoLists = todoLists;
 
-        this.addNewTaskToList = function(){
-            this.tasks.push(this.newTask);
-            this.resetNewTask();
+        this.addNewTaskToList = function(todolist){
+            todolist.tasks.push(todolist.newTask);
+            this.resetNewTask(todolist);
         };
 
-        this.resetNewTask = function(){
-            this.newTask = {text:"", completed:false};
+        this.resetNewTask = function(todolist){
+            todolist.newTask = {text:"", completed:false};
         };
 
-        this.completeAll = function(){
-            var taskList = this;
-            angular.forEach(this.tasks, function (value, key) {
-                value.completed = taskList.allCompleted;
+        this.completeAll = function(todolist){
+            angular.forEach(todolist.tasks, function (value, key) {
+                value.completed = todolist.allCompleted;
             });
         };
 
-        this.removeTask = function(task){
-            this.tasks.splice(this.tasks.indexOf(task), 1);
+        this.removeTask = function(task, todolist){
+            todolist.tasks.splice(todolist.tasks.indexOf(task), 1);
         };
 
         this.startEditing = function (task) {
@@ -48,25 +46,42 @@
             task.editing = false;
         };
 
-        this.resetNewTask();
+        angular.forEach(this.todoLists, function(todoList, key) {
+            this.resetNewTask(todoList);
+        }, this);
     });
 
-    var testTasks = [
+
+    var taskListMonday = [
         {
             text: 'learn angular',
             completed: false
         },
         {
+            text: 'set up django project',
+            completed: true
+        }
+    ];
+
+    var taskListTuesday = [
+        {
             text: 'learn django',
             completed: false
         },
         {
-            text: 'set up django project',
-            completed: true
-        },
-        {
             text: 'set up angular project',
             completed: true
+        }
+    ];
+
+    var todoLists = [
+        {
+            day : "Monday",
+            tasks : taskListMonday
+        },
+        {
+            day : "Tuesday",
+            tasks : taskListTuesday
         }
     ];
 })();
