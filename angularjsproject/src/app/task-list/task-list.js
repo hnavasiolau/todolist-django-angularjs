@@ -18,6 +18,7 @@
 
     taskList.controller('TaskListController', function(){
         this.tasks = testTasks;
+        this.allCompleted = false;
 
         this.addNewTaskToList = function(){
             this.tasks.push(this.newTask);
@@ -26,6 +27,13 @@
 
         this.resetNewTask = function(){
             this.newTask = {text:"", completed:false};
+        };
+
+        this.completeAll = function(){
+            var taskList = this;
+            angular.forEach(this.tasks, function (value, key) {
+                value.completed = taskList.allCompleted;
+            });
         };
 
         this.resetNewTask();
