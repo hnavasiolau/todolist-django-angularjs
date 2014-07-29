@@ -1,5 +1,8 @@
 <h2>TODO List</h2>
 <div ng-controller="TaskListController as taskList">
+
+    <input type="text" ng-model="taskList.newTask.text" ng-enter="taskList.addNewTaskToList()" placeholder="What needs to be done?"/>
+
     <div ng-repeat="task in taskList.tasks">
         <input type="checkbox" ng-model="task.completed">
         <span ng-class="{'line-through': task.completed}">

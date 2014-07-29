@@ -13,8 +13,33 @@ taskList.config(function config( $stateProvider ) {
     });
 });
 
+taskList.directive('ngEnter', function () {
+    return function (scope, element, attrs) {
+        element.bind("keydown keypress", function (event) {
+            if(event.which === 13) {
+                scope.$apply(function (){
+                    scope.$eval(attrs.ngEnter);
+                });
+
+                event.preventDefault();
+            }
+        });
+    };
+});
+
 taskList.controller('TaskListController', function(){
     this.tasks = testTasks;
+
+    this.addNewTaskToList = function(){
+        this.tasks.push(this.newTask);
+        this.resetNewTask();
+    };
+
+    this.resetNewTask = function(){
+        this.newTask = {text:"", completed:false};
+    };
+
+    this.resetNewTask();
 });
 
 var testTasks = [
