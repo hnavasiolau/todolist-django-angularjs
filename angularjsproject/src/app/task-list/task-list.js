@@ -1,20 +1,7 @@
 (function(){
     var taskList = angular.module( 'task-list',[
-        'ui.router',
         'common.ng-enter'
     ]);
-
-    taskList.config(function config( $stateProvider ) {
-        $stateProvider.state( 'task-list', {
-            url: '/task-list',
-            views: {
-                "main": {
-                    templateUrl: 'task-list/task-list.tpl.html'
-                }
-            }
-        });
-    });
-
 
     taskList.controller('TaskListController', function(){
         this.todoLists = todoLists;
