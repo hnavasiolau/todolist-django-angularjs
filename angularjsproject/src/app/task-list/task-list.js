@@ -3,6 +3,13 @@
         'common.ng-enter'
     ]);
 
+    taskList.directive('task', function(){
+        return {
+            restrict: 'E',
+            templateUrl: "task-list/task.tpl.html"
+        };
+    });
+
     taskList.controller('TaskListController', function(){
         this.todoLists = todoLists;
 
