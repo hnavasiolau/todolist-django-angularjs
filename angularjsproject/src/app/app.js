@@ -1,19 +1,17 @@
-angular.module( 'todo-list', [
-  'templates-app',
-  'templates-common',
-  'task-list',
-  'ui.router'
-])
+(function() {
+    var app = angular.module('todo-list', [
+        'templates-app',
+        'templates-common',
+        'task-list',
+        'ui.router'
+    ]);
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
-  $urlRouterProvider.otherwise( '/task-list' );
-})
+    app.config(function myAppConfig($stateProvider, $urlRouterProvider) {
+            $urlRouterProvider.otherwise('/task-list');
+    });
 
-.run( function run () {
-})
+    app.run(function run() {});
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
-})
-
-;
+    app.controller('AppCtrl', function AppCtrl($scope, $location) {});
+})();
 
