@@ -36,6 +36,10 @@
             });
         };
 
+        this.removeTask = function(task){
+            this.tasks.splice(this.tasks.indexOf(task), 1);
+        };
+
         this.resetNewTask();
     });
 
