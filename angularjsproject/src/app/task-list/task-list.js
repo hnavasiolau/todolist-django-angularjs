@@ -1,6 +1,7 @@
 (function(){
     var taskList = angular.module( 'task-list',[
-        'common.ng-enter'
+        'common.ng-enter',
+        'task-list.api-service'
     ]);
 
     taskList.directive('task', function(){
@@ -10,7 +11,16 @@
         };
     });
 
-    taskList.controller('TaskListController', function(){
+    taskList.controller('TaskListController',
+        ['TodoList', 'TodoListItem', function(TodoList, TodoListItem){
+
+
+        var todoLists = TodoList.query(function(){
+            angular.forEach(todoLists, function(todoList, key) {
+                todoList.tasks = TodoListItem.query({todoList : todoList.id});
+            });
+        });
+
         this.todoLists = todoLists;
 
         this.addNewTaskToList = function(todolist){
@@ -43,39 +53,5 @@
         angular.forEach(this.todoLists, function(todoList, key) {
             this.resetNewTask(todoList);
         }, this);
-    });
-
-
-    var taskListMonday = [
-        {
-            text: 'learn angular',
-            completed: false
-        },
-        {
-            text: 'set up django project',
-            completed: true
-        }
-    ];
-
-    var taskListTuesday = [
-        {
-            text: 'learn django',
-            completed: false
-        },
-        {
-            text: 'set up angular project',
-            completed: true
-        }
-    ];
-
-    var todoLists = [
-        {
-            day : "Monday",
-            tasks : taskListMonday
-        },
-        {
-            day : "Tuesday",
-            tasks : taskListTuesday
-        }
-    ];
+    }]);
 })();

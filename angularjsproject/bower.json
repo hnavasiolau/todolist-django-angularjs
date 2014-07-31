@@ -6,7 +6,11 @@
     "angular-mocks": "~1.2",
     "bootstrap": "~3.1",
     "angular-bootstrap": "~0.10.0",
-    "angular-ui-router": "~0.2"
+    "angular-ui-router": "~0.2",
+    "angular-resource": "https://github.com/angular/bower-angular-resource.git"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "resolutions": {
+    "angular": ">= 1.0.8"
+  }
 }

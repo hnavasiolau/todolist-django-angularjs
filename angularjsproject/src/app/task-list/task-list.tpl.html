@@ -1,7 +1,7 @@
 <h2>TODO List</h2>
 <div ng-repeat="taskList in taskListCtrl.todoLists">
     <br>
-    <h3>{{taskList.day}}</h3>
+    <h3>{{taskList.name}}</h3>
     <div class="row">
         <input type="checkbox" class="col-lg-1" ng-model="taskList.allCompleted" ng-change="taskListCtrl.completeAll(taskList)">
         <input type="text" class="col-lg-5" ng-model="taskList.newTask.text" ng-enter="taskListCtrl.addNewTaskToList(taskList)" placeholder="What needs to be done?"/>
