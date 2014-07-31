@@ -26,4 +26,7 @@ python manage.py syncdb
 9. open shell
 python manage.py shell
 
+10. install django filter
+pip install django-filter
+
 
