@@ -24,7 +24,14 @@
         this.todoLists = todoLists;
 
         this.addNewTaskToList = function(todolist){
-            todolist.tasks.push(todolist.newTask);
+            var todoListItem = new TodoListItem({
+                todoList: todolist.id,
+                text: todolist.newTask.text,
+                completed: todolist.newTask.completed});
+            todoListItem.$save();
+
+            todolist.tasks.push(todoListItem);
+
             this.resetNewTask(todolist);
         };
 
@@ -35,10 +42,12 @@
         this.completeAll = function(todolist){
             angular.forEach(todolist.tasks, function (value, key) {
                 value.completed = todolist.allCompleted;
+                value.$update();
             });
         };
 
         this.removeTask = function(task, todolist){
+            TodoListItem.remove({},{id:task.id});
             todolist.tasks.splice(todolist.tasks.indexOf(task), 1);
         };
 
@@ -47,6 +56,7 @@
         };
 
         this.doneEditing = function (task) {
+            task.$update();
             task.editing = false;
         };
 

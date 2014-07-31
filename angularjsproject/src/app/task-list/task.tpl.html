@@ -1,5 +1,5 @@
 <div class="row">
-    <input type="checkbox" class="col-lg-1" ng-model="task.completed">
+    <input type="checkbox" class="col-lg-1" ng-model="task.completed" ng-change="task.$update()">
         <span class="col-lg-4" ng-class="{'line-through': task.completed}" ng-dblclick="taskListCtrl.startEditing(task)">
             <span ng-hide="task.editing">{{task.text}}</span>
 
