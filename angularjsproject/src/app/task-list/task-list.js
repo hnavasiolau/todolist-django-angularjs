@@ -12,7 +12,7 @@
     });
 
     taskList.controller('TaskListController',
-        ['TodoList', 'TodoListItem', function(TodoList, TodoListItem){
+        ['TodoList', 'TodoListItem', '$log', function(TodoList, TodoListItem, $log){
 
 
         var todoLists = TodoList.query(function(){
@@ -23,16 +23,20 @@
 
         this.todoLists = todoLists;
 
+        var genericResourceErrorCallback = function(errorResult){
+            $log.error('Couldn\'t perform operation on server. HTTP error code is: ' + errorResult.status);
+        };
+
         this.addNewTaskToList = function(todolist){
+            var taskListCtrl = this;
             var todoListItem = new TodoListItem({
                 todoList: todolist.id,
                 text: todolist.newTask.text,
                 completed: todolist.newTask.completed});
-            todoListItem.$save();
-
-            todolist.tasks.push(todoListItem);
-
-            this.resetNewTask(todolist);
+            todoListItem.$save({}, function(successResult) {
+                todolist.tasks.push(todoListItem);
+                taskListCtrl.resetNewTask(todolist);
+            }, genericResourceErrorCallback);
         };
 
         this.resetNewTask = function(todolist){
@@ -42,13 +46,19 @@
         this.completeAll = function(todolist){
             angular.forEach(todolist.tasks, function (value, key) {
                 value.completed = todolist.allCompleted;
-                value.$update();
+                value.$update({}, function(successResult){
+                }, function(errorResult){
+                    value.completed = !value.completed;
+                    genericResourceErrorCallback(errorResult);
+                });
             });
         };
 
         this.removeTask = function(task, todolist){
-            TodoListItem.remove({},{id:task.id});
-            todolist.tasks.splice(todolist.tasks.indexOf(task), 1);
+            TodoListItem.remove({},{id:task.id},
+                function(successResult) {
+                    todolist.tasks.splice(todolist.tasks.indexOf(task), 1);
+                }, genericResourceErrorCallback);
         };
 
         this.startEditing = function (task) {
@@ -56,8 +66,17 @@
         };
 
         this.doneEditing = function (task) {
-            task.$update();
-            task.editing = false;
+            task.$update({}, function(successResult){
+                task.editing = false;
+            },genericResourceErrorCallback);
+        };
+
+        this.updateCompleted = function(task) {
+            task.$update({}, function(successResult){
+                }, function(errorResult){
+                task.completed = !task.completed;
+                genericResourceErrorCallback(errorResult);
+            });
         };
 
         angular.forEach(this.todoLists, function(todoList, key) {
